@@ -14,7 +14,7 @@ Using the EM algorithm, we estimate:
 * Mixing coefficients (π)
 * Posterior probabilities for classification
 
-## How to Run
+### How to Run
 
 ### Requirements
 Install the required libraries:
@@ -68,13 +68,13 @@ Using the responsibilities:
 
 The process repeats until the model converges.
 
-## Log-Likelihood
+### Log-Likelihood
 
 The log-likelihood measures how well the current model explains the data.
 
 As the EM algorithm runs, the log-likelihood should increase (become less negative), indicating that the model is improving.
 
-# Output
+### Output
 
 The program prints:
 
@@ -97,7 +97,7 @@ Probability Father: 72.94%
 
 ---
 
-# Conclusion
+### Part One Conclusion
 
 The EM algorithm successfully models the height data as a mixture of two Gaussian distributions. Unlike a simple mean-based split, EM uses probabilistic classification, making it more effective when the distributions overlap.
 
