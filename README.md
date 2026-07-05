@@ -140,6 +140,99 @@ The program will:
 ### Part Two Conclusion
 Bayesian probability provides a principled way to quantify how much a single keyword shifts our belief about a review's sentiment. Keywords that are common in positive reviews but rare overall produce the largest posterior shifts, confirming they are meaningful sentiment indicators — while generically common words fail to move the posterior far from the prior, showing they carry little diagnostic value on their own.
 
+## Part 3: Gradient Descent (Manual Calculation)
+
+### Overview
+
+This part demonstrates the **manual implementation of Gradient Descent** for a simple linear regression model using matrix multiplication.
+
+The objective is to understand how Gradient Descent iteratively updates the model parameters to minimize the **Mean Squared Error (MSE)** between the predicted values and the actual target values.
+
+Unlike the coded implementation in Part 4, every calculation in this section is performed manually to illustrate the mathematical process behind parameter optimization.
+
+### Given Parameters
+
+The calculations use the following initial values:
+
+```text
+m = [-1, 2]
+
+b = [1, 1]
+
+X = [[1, 3],
+     [4,10]]
+
+y = [5, 6]
+```
+
+Learning Rate:
+
+```text
+α = 0.01
+```
+
+### Manual Procedure
+
+For each iteration, the following steps are performed:
+
+1. Compute the predicted values using:
+
+```math
+\hat{y}=Xm+b
+```
+
+2. Compute the error vector:
+
+```math
+e=\hat{y}-y
+```
+
+3. Compute the Mean Squared Error (MSE):
+
+```math
+MSE=\frac{1}{n}\sum(\hat{y}-y)^2
+```
+
+4. Compute the gradients using matrix multiplication:
+
+```math
+\frac{\partial MSE}{\partial m}=\frac{2}{n}X^Te
+```
+
+```math
+\frac{\partial MSE}{\partial b}=\frac{2}{n}e
+```
+
+5. Update the parameters using Gradient Descent:
+
+```math
+m_{new}=m_{old}-\alpha\frac{\partial MSE}{\partial m}
+```
+
+```math
+b_{new}=b_{old}-\alpha\frac{\partial MSE}{\partial b}
+```
+
+6. Repeat the process for four iterations.
+
+### Results
+
+Over the four iterations, the model parameters gradually moved toward values that reduced the prediction error.
+
+| Iteration | MSE |
+|-----------|------:|
+| Initial | 61.0000 |
+| 1 | 6.5033 |
+| 2 | 2.4974 |
+| 3 | 2.1644 |
+| 4 | 2.0994 |
+
+The continuous reduction in MSE demonstrates that Gradient Descent successfully optimized the model parameters by moving in the direction of the steepest decrease of the cost function.
+
+### Part Three Conclusion
+
+The manual calculations provided a step-by-step demonstration of how Gradient Descent learns from data. By repeatedly computing predictions, evaluating the error, calculating gradients, and updating the parameters, the model progressively reduced the Mean Squared Error. This illustrates the fundamental optimization process used in machine learning algorithms before implementing the same procedure in code.
+
 ## Part 4: Gradient Descent in Code
 
 ### Overview
