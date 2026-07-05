@@ -140,15 +140,15 @@ The program will:
 ### Part Two Conclusion
 Bayesian probability provides a principled way to quantify how much a single keyword shifts our belief about a review's sentiment. Keywords that are common in positive reviews but rare overall produce the largest posterior shifts, confirming they are meaningful sentiment indicators — while generically common words fail to move the posterior far from the prior, showing they carry little diagnostic value on their own.
 
-# Part 4: Gradient Descent in Code
+## Part 4: Gradient Descent in Code
 
-## Overview
+### Overview
 
 This section implements the **Gradient Descent Algorithm** for a multiple linear regression model using matrix multiplication. The objective is to iteratively update the model parameters (**m** and **b**) to minimize the **Mean Squared Error (MSE)** between the predicted and actual values.
 
 SciPy is used to numerically compute the derivatives of the cost function, while Matplotlib is used to visualize how the parameters and error change over successive iterations.
 
-## How to Run
+### How to Run
 
 ### Requirements
 
@@ -175,7 +175,7 @@ The program will:
 7. Compute the final predictions using the optimized parameters.
 8. Display plots showing parameter updates and error reduction over the iterations.
 
-## Gradient Descent
+### Gradient Descent
 
 Gradient Descent is an optimization algorithm that minimizes a cost function by repeatedly updating the model parameters in the direction opposite to the gradient.
 
@@ -187,13 +187,13 @@ For each iteration, the algorithm:
 - Updates the values of **m** and **b**.
 - Stores the updated parameters and error for visualization.
 
-## Mean Squared Error (MSE)
+### Mean Squared Error (MSE)
 
 The Mean Squared Error measures the average squared difference between the predicted values and the actual values.
 
 As Gradient Descent progresses, the MSE should decrease, indicating that the model is learning parameters that better fit the data.
 
-## Output
+### Output
 
 The program displays:
 
@@ -208,7 +208,6 @@ It also generates two plots:
 1. A graph showing how **m** and **b** change over each iteration.
 2. A graph showing how the Mean Squared Error decreases over the iterations.
 
----
 
 ### Part Four Conclusion
 
