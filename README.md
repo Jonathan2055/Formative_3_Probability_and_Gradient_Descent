@@ -105,39 +105,93 @@ The EM algorithm successfully models the height data as a mixture of two Gaussia
 
 ### Overview
 
-This project applies **Bayes' Theorem** from scratch in Python to estimate how strongly certain keywords signal positive or negative sentiment in movie reviews.
+This part applies **Bayes' Theorem** to real review text to determine whether specific keywords are meaningful indicators of positive sentiment.
 
-Using the IMDB Movie Reviews Dataset, we selected keywords associated with positive and negative sentiment, then computed the probability that a review is positive given the presence of each keyword.
+Using the IMDB Movie Reviews Dataset, we selected keywords believed to signal positive or negative sentiment, then computed the probability that a review is positive given the presence of each keyword — implemented using only basic Python and pandas/numpy operations (no external ML libraries).
+
+We compute four values for each keyword:
+
+* Prior P(Positive)
+* Likelihood P(keyword|Positive)
+* Marginal P(keyword)
+* Posterior P(Positive|keyword)
 
 ### How to Run
 
 ### Requirements
 Install the required libraries:
-Dependencies:
+Dependencies are:
 1. Pandas
 2. Numpy
 
 Import the dataset and update the path in this line:
-```python
-df = pd.read_csv("IMDB Dataset.csv")
-```
-
-Note: the dataset may throw a `ParserError` due to unescaped quote characters in review text. If this happens, load it with the Python engine instead:
-```python
-df = pd.read_csv("IMDB Dataset.csv", engine="python", on_bad_lines="skip")
-```
+`df = pd.read_csv("IMDB Dataset.csv")`
 
 ### Run the Program
 Run all cells from top to bottom.
 
 The program will:
 
-1. Load the review dataset.
-2. Define selected positive and negative keywords.
-3. Check keyword presence in individual reviews.
-4. Compute the prior probability of a positive review.
+1. Load the IMDB review dataset.
+2. Inspect the dataset's structure and sentiment balance.
+3. Define the chosen positive and negative keywords.
+4. Check for keyword presence in review text.
+5. Compute the prior probability of a review being positive.
+6. Compute the likelihood of each keyword appearing in positive reviews.
+7. Compute the marginal probability of each keyword across all reviews.
+8. Apply Bayes' Theorem to compute the posterior probability for each keyword.
+9. Display a results table comparing all four values per keyword.
+
+## Problem Statement
+
+Without any additional information, our best guess about whether a review is positive is just the overall rate of positive reviews in the dataset — the prior. This guess is naive because it ignores the actual content of the review.
+
+Bayes' Theorem lets us update that guess once we observe a specific keyword in the text, producing a more informed probability rather than relying on a single dataset-wide average.
+
+## Bayes' Theorem Breakdown
+
+For each keyword, we calculate:
+
+### Prior — P(Positive)
+
+The overall probability a review is positive, regardless of content — our starting belief before considering any keyword.
+
+### Likelihood — P(keyword|Positive)
+
+Out of only the positive reviews, what fraction contain the keyword. This measures how typical the keyword is within positive reviews specifically.
+
+### Marginal — P(keyword)
+
+The overall frequency of the keyword across all reviews, regardless of sentiment. This normalizes the calculation and prevents generically common words from appearing falsely significant.
+
+### Posterior — P(Positive|keyword)
+
+The final, updated probability that a review is positive, given that the keyword was observed. This is the answer Bayes' Theorem produces — it tells us whether a keyword is a strong or weak signal of sentiment.
+
+### Output
+
+The program prints a results table containing, for each keyword:
+
+* Keyword
+* P(Positive)
+* P(keyword|Positive)
+* P(keyword)
+* P(Positive|keyword)
+
+Example:
+
+```text
+keyword      P(Positive)   P(keyword|Positive)   P(keyword)   P(Positive|keyword)
+excellent    0.50          0.18                   0.11         0.82
+boring       0.50          0.04                   0.15         0.13
+```
+
+A posterior noticeably higher than the prior indicates the keyword is a strong signal toward positive sentiment; a posterior close to the prior indicates the keyword carries little predictive value.
+
+---
 
 ### Part Two Conclusion
+
 Bayesian probability provides a principled way to quantify how much a single keyword shifts our belief about a review's sentiment. Keywords that are common in positive reviews but rare overall produce the largest posterior shifts, confirming they are meaningful sentiment indicators — while generically common words fail to move the posterior far from the prior, showing they carry little diagnostic value on their own.
 
 ## Part 3: Gradient Descent (Manual Calculation)
